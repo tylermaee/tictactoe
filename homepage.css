@@ -1,0 +1,31 @@
+
+.flexContainer {
+    background-image: url('assets/images/background.jpeg');
+    background-size: cover;
+    background-position: cover;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#h1 {
+    font-family: Roboto Mono, sans-serif;
+    color: white;
+    font-size: 3.5em;
+    margin-bottom: 60px;
+
+
+}
+
+#startBtn {
+    color: white;
+    font-size: 2em;
+    background-color: rgb(0, 0, 0);
+    font-family: Roboto Mono, sans-serif;
+    width: 40vw;
+}
