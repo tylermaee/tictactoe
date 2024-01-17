@@ -1,13 +1,18 @@
 *{
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
     color: white;
     font-family: Roboto Mono, sans-serif;
+    box-sizing: border-box;
 }
 
 :root {
-    --winning-order: #f4f7f8;
+    --winning-blocks: #d55c5c;
+}
+
+h1 {
+    font-size: 54px;
+    text-transform: uppercase;
 }
 
 body {
@@ -22,18 +27,12 @@ body {
     align-items: center;
     height: 100vh;
     margin: 0;
-    font-family: 'Finger Paint', cursive;
 
-}
-
-h1 {
-    font-size: 54px;
-    text-transform: uppercase;
 }
 
 .container {
-    padding: 40px;
-    height: 60vh;
+    padding: 50px;
+    height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;

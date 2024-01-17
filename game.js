@@ -1,16 +1,16 @@
 // CREATE VARIABLES AND BOXES ARRAY
 
-let playertext = document.getElementById('playerText')
+let playerText = document.getElementById('playerText')
 let restartBtn =document.getElementById('restartBtn')
 let boxes = Array.from(document.getElementsByClassName('box'))
 
-let winningIndicator = getComputedStyle
+let winnerIndicator = getComputedStyle(document.body).getPropertyValue('--winning-blocks')
 
 // CREATE USER 1 AND 2 SYMBOLS, DECALRE USER 1 SYMBOL AND FILL EACH BOX IN ARRAY WITH VALUE NULL
 
 const O_SYMBOL = "O"
 const X_SYMBOL = "X"
-let currentUser = X_SYMBOL
+let currentPlayer = X_SYMBOL
 let spaces = Array(9).fill(null)
 
 // START GAME FUNCTIONS ADD EVENT LISTENERS TO ALL 9 BOXES. ARROW FUNCTION WITH CALLBACK FUNCTION BOXCLICKED
@@ -21,26 +21,27 @@ const startGame = () => {
 
 // BOX CLICKED FUNCTION WILL TARGET THE BOX CLICKED BY THE USER 
 
-function boxClicked(userSelection) {
-    const id = userSelection.target.id
+function boxClicked(e) {
+    const id = e.target.id
 
-// IF SPACES IS EQUAL TO NULL WE CAN CONTINUE
+// IF SPACES IS NULL WE CAN CONTINUE
 // FILL THE SPACES AND CHANGE THE VALUE OF THE SYMBOLS AFTER EACH CLICK
 
     if(!spaces[id]){
-        spaces[id] = currentUser
-        userSelection.target.innerText = currentUser
+        spaces[id] = currentPlayer
+        e.target.innerText = currentPlayer
 
 // CREATE WINNING FUNCTION 
 
-        if(winningUser()){
-            winningMessage = `${currentUser} wins!`
-            let winning_order = winningUser()
-
-            winning_blocks = 
+        if(playerHasWon() !==false){
+            playerText.innerHTML = `${currentPlayer} won!`
+            let winning_blocks = playerHasWon()  
+            
+            winning_blocks.map( box => boxes[box].style.backgroundColor=winnerIndicator)
+            return
         }
 
-        currentUser = currentUser == X_SYMBOL ? O_SYMBOL : X_SYMBOL
+        currentPlayer = currentPlayer == X_SYMBOL ? O_SYMBOL : X_SYMBOL
     }
 }
 
@@ -57,12 +58,13 @@ const winningCombos = [
 ]
 
 //  USE ITERATOR TO CHECK FOR 3 SPACES IN A ROW ARE FILLED AND USER HAS WON
-function winningUser() {
+function playerHasWon() {
     for (const condition of winningCombos){
         let [a, b, c] = condition
 
-        if(spaces[a] &&  (spaces[a] == spaces[b] && spaces[a] == spaces[c])) {
+        if(spaces[a] && (spaces[a] == spaces[b] && spaces[a] == spaces[c])) {
         return [a, b, c]
+
         }
     }
     return false
@@ -70,18 +72,19 @@ function winningUser() {
 
 // ADD CLICK EVENT LISTENER TO RESTART BUTTON AND RUN RESTART FUNCTION. RESTART FUNCTION WILL FILL ARRAY WITH NULL. 
 
-    restartBtn.addEventListener('click', restart)
+restartBtn.addEventListener('click', restart)
 
 function restart() {
-        spaces.fill(null)
+    spaces.fill(null)
 
-        boxes.forEach( box => {
-            box.innerText = ''
-     })
+    boxes.forEach( box => {
+        box.innerText = ''
+        box.style.backgroundColor= ''
+    })  
 // RESET WINNING MESSAGE
-        winningMessage = 'Tic Tac Toe'
+        playerText.innerHTML = 'Tic Tac Toe'
 // SET X SYMBOL AS DEFAULT
-        currentUser =  X_SYMBOL
+        currentPlayer =  X_SYMBOL
 
 }
 
