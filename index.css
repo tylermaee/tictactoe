@@ -28,6 +28,6 @@
     background-color: rgb(0, 0, 0);
     font-family: Roboto Mono, sans-serif;
     width: 35vw;
-    border-radius: 10px;
+    border-radius: 13px;
     transition: 200ms transform;
 }
